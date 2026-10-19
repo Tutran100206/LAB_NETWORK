@@ -1,0 +1,32 @@
+#bo day Core2
+conf t
+int ra e1/0-1
+no sh
+sw tr en do
+sw mo tr
+channel-gr 23 mode desi
+ex
+
+#trunk e1/3
+int e1/3
+no sh
+sw tr en do
+sw mo tr
+ex
+
+#vtp cli lan truyen vlan
+vtp mode cli
+vtp domain anhtu
+vtp pass 123
+ex
+
+#Khoa po23 vl 2
+int po23
+spanning-tree vl 2 cost 500
+
+#acc vl2,3 vao cong
+int e0/0
+sw acc vl 2
+int e0/1
+sw acc vl 3
+ex

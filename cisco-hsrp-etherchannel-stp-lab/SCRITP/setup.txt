@@ -1,0 +1,7 @@
+conf t
+no ip domain lookup
+no ip cef
+line console 0
+loggin synchronous
+exec-timeout 0 0
+exit

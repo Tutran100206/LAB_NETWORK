@@ -1,0 +1,89 @@
+conf t
+ip routing
+
+#bo day SW4
+int ra e1/0-1
+no sh
+sw tr en do
+sw mo tr
+channel-gr 23 mode desi
+exit
+
+#bo day Core1
+int ra e0/1-2
+sw tr en do
+sw mo tr
+channel-gr 12 mode active
+ex
+
+#trunk e1/3
+int e1/3
+no sh
+sw tr en do
+sw mo tr
+ex
+
+# setup vtp
+vtp domain anhtu
+vtp pass 123
+
+#vl 101 vao e0/0
+int e0/0
+no sh
+sw acc vl 101
+ex
+
+#ROOT SW VL3
+spanning-tree vl 3 root pri
+
+
+#SVI
+int vl 101
+no sh
+ip add 192.168.101.2 255.255.255.0
+ex
+int vl 1
+no sh
+ip add 192.168.1.2 255.255.255.0
+ex
+int vl 2
+no sh
+ip add 192.168.2.2 255.255.255.0
+ex
+int vl 3
+no sh
+ip add 192.168.3.1 255.255.255.0
+ex
+
+#dinh tuyen tinh
+ip route 1.1.1.1 255.255.255.255 192.168.101.1
+
+
+#HSRP
+int vl 2
+standby 2 ip 192.168.2.254           
+standby 2 preempt
+exit
+
+int vl 3
+standby 3 ip 192.168.3.254           
+standby 3 priority 110
+standby 3 preempt
+exit
+
+#CORE2: IP SLA CHO VL3
+ip sla 3
+icmp-echo 192.168.101.1
+frequency 5
+exit
+ip sla schedule 3 life forever start-time now
+
+#ip helper cap dhcp cac vlan
+interface vlan 2
+ip helper-address 192.168.101.1
+exit
+
+interface vlan 3
+ip helper-address 192.168.101.1
+exit
+

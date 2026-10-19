@@ -1,0 +1,65 @@
+conf t
+
+#setip
+int e0/0
+no sh 
+ip add 192.168.100.1 255.255.255.0
+ex
+int e0/1
+no sh
+ip add 192.168.101.1 255.255.255.0
+ex
+int l0
+no sh
+ip add 1.1.1.1 255.255.255.255
+ex
+
+#dinh tuyen tinh (4 duong 2 duong chinh 2 duong du phong)
+ip route 192.168.2.0 255.255.255.0 192.168.100.2
+ip route 192.168.2.0 255.255.255.0 192.168.101.2 2
+ip route 192.168.3.0 255.255.255.0 192.168.101.2
+ip route 192.168.3.0 255.255.255.0 192.168.100.2 2
+
+#IP SLA CHO VL2
+ip sla 2
+icmp-echo 192.168.2.1
+frequency 5
+exit
+ip sla schedule 2 life forever start-time now
+
+#IP SLA CHO VL3
+ip sla 3
+ icmp-echo 192.168.3.1
+ frequency 5
+ exit
+ip sla schedule 3 life forever start-time now
+
+#ip dhcp
+ip dh ex 192.168.2.1 192.168.2.10
+ip dh ex 192.168.3.1 192.168.3.10
+#cap vl2
+ip dh pool vl 2
+netw 192.168.2.0 /24
+default-router 192.168.2.1
+ex
+#cap vl 3
+ip dh pool vl 3
+netw 192.168.3.0 /24
+default-router 192.168.3.1
+ex
+
+#IP SLA CHO VL2
+ip sla 2
+icmp-echo 192.168.2.1
+frequency 5
+exit
+ip sla schedule 2 life forever start-time now
+
+#IP SLA CHO VL3
+ip sla 3
+ icmp-echo 192.168.3.1
+ frequency 5
+ exit
+ip sla schedule 3 life forever start-time now
+
+
