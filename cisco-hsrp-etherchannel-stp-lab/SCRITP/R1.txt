@@ -21,18 +21,34 @@ ip route 192.168.3.0 255.255.255.0 192.168.101.2
 ip route 192.168.3.0 255.255.255.0 192.168.100.2 2
 
 #IP SLA CHO VL2
+no ip sla 2
 ip sla 2
-icmp-echo 192.168.2.1
+icmp-echo 192.168.2.1 source-ip 192.168.100.1
 frequency 5
 exit
-ip sla schedule 2 life forever start-time now
+ip sla schedule 2 start-time now life forever
+ex
 
 #IP SLA CHO VL3
+no ip sla 3
 ip sla 3
- icmp-echo 192.168.3.1
- frequency 5
- exit
-ip sla schedule 3 life forever start-time now
+icmp-echo 192.168.3.1 source-ip 192.168.101.1
+frequency 5
+exit
+ip sla schedule 3 start-time now life forever
+
+#Track 
+track 2 ip sla 2 reach
+ex
+track 3 ip sla 3 reach
+ex
+
+#nhung Track vao ip route (du phong doi duong)
+ip route 192.168.2.0 255.255.255.0 192.168.100.2 track 2
+ip route 192.168.3.0 255.255.255.0 192.168.101.2 track 3
+no ip route 192.168.2.0 255.255.255.0 192.168.100.2
+no ip route 192.168.3.0 255.255.255.0 192.168.101.2
+ex
 
 #ip dhcp
 ip dh ex 192.168.2.1 192.168.2.10
@@ -48,18 +64,6 @@ netw 192.168.3.0 /24
 default-router 192.168.3.254
 ex
 
-#IP SLA CHO VL2
-ip sla 2
-icmp-echo 192.168.2.1
-frequency 5
-exit
-ip sla schedule 2 life forever start-time now
 
-#IP SLA CHO VL3
-ip sla 3
- icmp-echo 192.168.3.1
- frequency 5
- exit
-ip sla schedule 3 life forever start-time now
 
 
