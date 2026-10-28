@@ -28,7 +28,7 @@ ex
 vtp domain anhtu
 vtp pass 123
 vtp mode server
-vl 2,3,100
+vl 2,3,100,101
 ex
 
 #set vl 100 vao e0/0
