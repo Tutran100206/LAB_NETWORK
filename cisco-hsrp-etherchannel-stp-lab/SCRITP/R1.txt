@@ -40,12 +40,12 @@ ip dh ex 192.168.3.1 192.168.3.10
 #cap vl2
 ip dh pool vl 2
 netw 192.168.2.0 /24
-default-router 192.168.2.1
+default-router 192.168.2.254
 ex
 #cap vl 3
 ip dh pool vl 3
 netw 192.168.3.0 /24
-default-router 192.168.3.1
+default-router 192.168.3.254
 ex
 
 #IP SLA CHO VL2
