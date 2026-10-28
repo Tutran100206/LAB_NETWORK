@@ -1,9 +1,5 @@
 # Cisco Campus Network – Lab dự phòng HSRP, EtherChannel và STP
 
-![Trạng thái](https://img.shields.io/badge/Tr%E1%BA%A1ng%20th%C3%A1i-Ho%C3%A0n%20th%C3%A0nh-brightgreen)
-![Lĩnh vực](https://img.shields.io/badge/L%C4%A9nh%20v%E1%BB%B1c-Networking-blue)
-![Mức độ](https://img.shields.io/badge/%C4%90%E1%BB%8Bnh%20h%C6%B0%E1%BB%9Bng-CCNA%20%7C%20Network%20Intern-informational)
-
 > **Mục tiêu dự án:** Xây dựng một hệ thống mạng campus thu nhỏ có khả năng dự phòng ở cả lớp 2 và lớp 3, duy trì kết nối khi đường uplink gặp sự cố và tự động chuyển đổi thiết bị gateway bằng HSRP kết hợp IP SLA/Tracking.
 >
 > **Trạng thái:** Đã hoàn tất cấu hình, xử lý sự cố và kiểm thử chức năng trong môi trường lab.
