@@ -74,11 +74,22 @@ standby 3 preempt
 exit
 
 #CORE1: IP SLA CHO VL2
+no ip sla 2
 ip sla 2
-icmp-echo 192.168.100.1
+icmp-echo 192.168.100.1 source-ip 192.168.100.2
 frequency 5
 exit
-ip sla schedule 2 life forever start-time now
+ip sla schedule 2 start-time now life forever
+
+#Track
+track 2 ip sla 2 reach
+ex
+
+#nhung track vao standby 2 (vlan 2)
+int vl 2
+standby 2 track 2 dec 20
+ex
+
 
 #ip helper de cap dhcp cac vlan
 interface vlan 2
