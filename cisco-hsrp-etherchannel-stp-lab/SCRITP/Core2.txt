@@ -24,6 +24,7 @@ sw mo tr
 ex
 
 # setup vtp
+vtp mode cli
 vtp domain anhtu
 vtp pass 123
 
