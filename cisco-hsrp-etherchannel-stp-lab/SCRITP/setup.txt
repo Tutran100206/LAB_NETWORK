@@ -5,3 +5,10 @@ line console 0
 loggin synchronous
 exec-timeout 0 0
 exit
+
+#lenh ktra
+do sh run | s i ip ro
+do sh standby br
+do sh ip int br
+do sh track br
+do sh run | s i ip sla
