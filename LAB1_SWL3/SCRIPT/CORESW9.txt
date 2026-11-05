@@ -1,0 +1,39 @@
+#CORESW9
+en
+conf t
+ip routing
+
+#OSPF
+router os 1
+router-id 2.2.2.2
+ex
+
+#setip
+int e0/0
+no sw
+no sh
+ip add 172.16.22.2 255.255.255.0
+ip os 1 a 0
+ex
+
+#vlan server de DHCP SERVER CAP IP
+vl 100
+name SERVER
+ex
+int vl 100
+no sh
+ip add 192.168.100.1 255.255.255.0
+ip os 1 a 0
+exit 
+
+int e0/1 
+no sh
+sw acc vl 100
+ex
+
+int e0/2
+no sh
+sw acc vl 100
+ex
+
+

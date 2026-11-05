@@ -1,0 +1,29 @@
+#SW4
+en
+conf t
+
+#access vlan vao cac cong
+int e0/0
+no sh
+sw mo acc
+sw acc vl 10
+ex
+
+int e0/1
+no sh
+sw mo acc
+sw acc vl 20
+ex
+
+int e0/2
+no sh
+sw mo acc
+sw acc vl 30
+ex
+
+#trunk 
+int e0/3
+no sh
+sw tr en do
+sw mo tr
+ex

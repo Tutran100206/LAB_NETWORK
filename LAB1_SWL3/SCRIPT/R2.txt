@@ -1,0 +1,23 @@
+#R2
+en
+conf t
+
+#OSPF
+router os 1
+router-id 3.3.3.3
+ex
+
+#set ip
+int e0/0
+no sh
+ip add 172.16.12.2 255.255.255.0
+ip os 1 a 0
+ex
+
+int e0/1
+no sh
+ip add 172.16.21.2 255.255.255.0
+ip os 1 a 0
+ex
+
+
